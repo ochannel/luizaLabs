@@ -15,6 +15,5 @@ public class LoadOrdersFiles {
 
     public void execute(BufferedReader fileBuffer) throws IOException {
         convertOrderFileToJson.getListOfOrder(fileBuffer);
-
     }
 }
