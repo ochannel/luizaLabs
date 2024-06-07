@@ -1,15 +1,25 @@
 package com.luizalabs.fileconverter.infrastructure.entrypoint.rest;
 
+import com.luizalabs.fileconverter.core.usecase.FindByOrderDateBetweenStartAndEnd;
+import com.luizalabs.fileconverter.core.usecase.GetOrderOfId;
 import com.luizalabs.fileconverter.core.usecase.LoadOrdersFiles;
-import com.luizalabs.fileconverter.infrastructure.mapper.MapperBufferedReader;
+import com.luizalabs.fileconverter.infrastructure.entrypoint.vo.MainOrderVO;
+import com.luizalabs.fileconverter.infrastructure.mapper.BufferedReaderMapper;
+import com.luizalabs.fileconverter.infrastructure.mapper.MainOrderVOMapper;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -18,13 +28,33 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class OrderController {
 
-    private final MapperBufferedReader mapper;
+    private  final MainOrderVOMapper mainOrderVOMapper;
+    private final BufferedReaderMapper mapper;
     private final LoadOrdersFiles useCase;
+    private final GetOrderOfId getOrderOfId;
+    private final FindByOrderDateBetweenStartAndEnd findByOrderDateBetweenStartAndEnd;
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public String createOrder(@RequestParam("file") MultipartFile file ) throws IOException {
-      useCase.execute(mapper.create(file));
-        return "teste";
+    public List<MainOrderVO> createOrder(@RequestParam("file") MultipartFile file) throws IOException {
+       return useCase.execute(mapper.create(file)).stream().map(order->mainOrderVOMapper.create(order)).collect(Collectors.toList());
+
+    }
+    @GetMapping(value = "/{orderId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public MainOrderVO getOrder(@PathVariable Long orderId) {
+      return   mainOrderVOMapper.create(getOrderOfId.execute(orderId));
+    }
+    @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public List<MainOrderVO> getOrder(
+            @NotNull(message = "Date cannot be null")
+            @PastOrPresent(message = "Date must be in the past or present")
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @NotNull(message = "Date cannot be null")
+            @PastOrPresent(message = "Date must be in the past or present")
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate
+    ) {
+        return findByOrderDateBetweenStartAndEnd.execute(startDate,endDate).stream().map(order ->  mainOrderVOMapper.create(order)).collect(Collectors.toList());
     }
 }

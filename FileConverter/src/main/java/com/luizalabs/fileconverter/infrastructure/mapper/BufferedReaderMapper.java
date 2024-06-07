@@ -9,8 +9,7 @@ import java.io.InputStreamReader;
 
 
 @Component
-public class MapperBufferedReader {
-
+public class BufferedReaderMapper {
     public BufferedReader create(MultipartFile file) throws IOException {
       return new BufferedReader(new InputStreamReader(file.getInputStream()));
    }
