@@ -5,10 +5,13 @@ import com.luizalabs.fileconverter.core.entity.Product;
 import com.luizalabs.fileconverter.infrastructure.entrypoint.vo.MainOrderVO;
 import com.luizalabs.fileconverter.infrastructure.entrypoint.vo.OrderVO;
 import com.luizalabs.fileconverter.infrastructure.entrypoint.vo.ProductVO;
+import com.luizalabs.fileconverter.infrastructure.mongodb.document.OrderDocument;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.modelmapper.spi.MappingContext;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -52,5 +55,11 @@ public class MainOrderVOMapper {
         MainOrderVO mainOrderVO = mapper.map(order, MainOrderVO.class);
         mainOrderVO.setOrders(Arrays.asList(orderVO));
         return mainOrderVO;
+    }
+    public Page<MainOrderVO> create(Page<Order> page){
+        List<MainOrderVO> listOrder = page.stream()
+                .map(order -> create(order))
+                .collect(Collectors.toList());
+        return new PageImpl<>(listOrder, page.getPageable(), page.getTotalElements());
     }
 }

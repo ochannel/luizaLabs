@@ -34,7 +34,7 @@ public class OrderMongoWapper implements OrderGateWay {
         OrderDocument orderDocument = orderDocumentMapper.create(order);
         return orderEntityMapper.create(repository.save(orderDocument));
     }
-
+    @Override
     public Page<Order> getAllOrder(int page, int size) {
         Sort.Direction direction = Sort.Direction.fromString("desc");
         Pageable pageable = PageRequest.of(page, size, Sort.by(direction, "idOrder"));
