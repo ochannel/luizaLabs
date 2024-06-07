@@ -36,7 +36,7 @@ public class OrderController {
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public List<MainOrderVO> createOrder(@RequestParam("file") MultipartFile file) throws IOException {
+    public List<MainOrderVO> createOrder(  @NotNull(message = "file cannot be null") @RequestParam("file") MultipartFile file) throws IOException {
        return useCase.execute(mapper.create(file)).stream().map(order->mainOrderVOMapper.create(order)).collect(Collectors.toList());
 
     }

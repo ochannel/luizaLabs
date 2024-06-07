@@ -18,16 +18,13 @@ import java.util.Optional;
 @Service
 public class ConvertOrderFileToJson {
 
-    public Optional<List<Order>> getListOfOrder(BufferedReader fileBuffer) throws IOException {
+    public List<Order> getListOfOrder(BufferedReader fileBuffer) throws IOException {
         List<Order> listOrder = new ArrayList<>();
         String line = null;
         while ((line = fileBuffer.readLine()) != null) {
             getOrder(line).ifPresent(order -> listOrder.add(order));
         }
-        if (listOrder.isEmpty()) {
-            return Optional.empty();
-        }
-        return Optional.of(listOrder);
+            return listOrder;
     }
 
     private Optional<Order> getOrder(String line) {
