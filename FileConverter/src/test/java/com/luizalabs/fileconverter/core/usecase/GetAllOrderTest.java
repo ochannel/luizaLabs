@@ -23,7 +23,7 @@ class GetAllOrderTest {
     @InjectMocks
     private GetAllOrder getAllOrder;
 
-    @DisplayName("Give:page and size When:executeUseCase Then:Returns an order list")
+    @DisplayName("Give:page and size When:executeUseCase Then:Returns an Page<order> ")
     @Test
     void getAllOrderSuccessfully() {
         //GIVEN - ARRANGE
@@ -38,7 +38,7 @@ class GetAllOrderTest {
         assertThat(retunPage.getTotalElements(), is(2L));
     }
 
-    @DisplayName("Give:page and size When:executeUseCase Then:Returns an empty order list")
+    @DisplayName("Give:page and size When:executeUseCase Then:Returns an empty Page<Order> ")
     @Test
     void getAllOrderEmpty() {
         //GIVEN - ARRANGE

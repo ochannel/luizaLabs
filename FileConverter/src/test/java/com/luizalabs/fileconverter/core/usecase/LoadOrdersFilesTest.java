@@ -35,7 +35,7 @@ class LoadOrdersFilesTest {
     @InjectMocks
     private LoadOrdersFiles loadOrdersFiles;
 
-    @DisplayName("Give:id When:executeUseCase Then:Returns an order")
+    @DisplayName("Give:bufferedReader When:executeUseCase Then:Returns an order list")
     @Test
     void loadOrdersFilesSuccessfully() throws IOException {
         //GIVEN - ARRANGE
@@ -52,7 +52,7 @@ class LoadOrdersFilesTest {
         assertThat(returnListOrder.get(1), is(expected2));
     }
 
-    @DisplayName("Give:id When:executeUseCase Then:Returns an order")
+    @DisplayName("Give:bufferedReader When:executeUseCase Then:Returns an BadRequestException")
     @Test
     void loadOrdersFilesInvalidFile() throws IOException {
         //GIVEN - ARRANGE
