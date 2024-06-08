@@ -3,6 +3,7 @@ package com.luizalabs.fileconverter.core.service;
 import com.luizalabs.fileconverter.core.entity.Order;
 import com.luizalabs.fileconverter.core.entity.Product;
 import com.luizalabs.fileconverter.core.entity.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class ConvertOrderFileToJson {
 
     public List<Order> getListOfOrder(BufferedReader fileBuffer) throws IOException {
@@ -24,7 +26,7 @@ public class ConvertOrderFileToJson {
         while ((line = fileBuffer.readLine()) != null) {
             getOrder(line).ifPresent(order -> listOrder.add(order));
         }
-            return listOrder;
+        return listOrder;
     }
 
     private Optional<Order> getOrder(String line) {
@@ -47,6 +49,7 @@ public class ConvertOrderFileToJson {
             return Optional.of(order);
 
         } catch (Exception e) {
+            log.warn("Line didn't process,"+line);
             return Optional.empty();
         }
     }

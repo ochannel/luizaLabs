@@ -1,13 +1,12 @@
 package com.luizalabs.fileconverter.infrastructure.exceptionhandle;
 
-import com.luizalabs.fileconverter.core.exception.NotFoundException;
 import com.luizalabs.fileconverter.core.exception.BadRequestException;
+import com.luizalabs.fileconverter.core.exception.NotFoundException;
 import com.luizalabs.fileconverter.infrastructure.entrypoint.vo.MensageResponseVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

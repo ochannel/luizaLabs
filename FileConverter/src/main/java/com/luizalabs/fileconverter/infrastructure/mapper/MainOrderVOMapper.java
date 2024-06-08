@@ -5,7 +5,6 @@ import com.luizalabs.fileconverter.core.entity.Product;
 import com.luizalabs.fileconverter.infrastructure.entrypoint.vo.MainOrderVO;
 import com.luizalabs.fileconverter.infrastructure.entrypoint.vo.OrderVO;
 import com.luizalabs.fileconverter.infrastructure.entrypoint.vo.ProductVO;
-import com.luizalabs.fileconverter.infrastructure.mongodb.document.OrderDocument;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
