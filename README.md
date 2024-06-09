@@ -33,6 +33,8 @@ O **File Converter** é um sistema que permite a conversão de arquivos de pedid
 
 - **docker-compose.yml**: Arquivo de configuração usado pelo Docker Compose para definir e gerenciar multi-contêineres Docker.
 - **FileConverter**: Pasta principal do projeto File Converter.
+- **examplefiles**: Pasta com os arquivos de exemplo para realizar a carga.
+- **OrdersAPI.json**: Arquivo de collections do Postman.
 
 ## Arquitetura do Projeto
 
