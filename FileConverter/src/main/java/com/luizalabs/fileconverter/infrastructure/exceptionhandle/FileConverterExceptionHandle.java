@@ -11,6 +11,7 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.method.annotation.HandlerMethodValidationException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
@@ -63,5 +64,9 @@ public class FileConverterExceptionHandle {
     public ResponseEntity<String> handleNoResourceFoundException(NoResourceFoundException ex) {
         String errorMessage = "The requested resource could not be found.";
         return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(HandlerMethodValidationException.class)
+    public ResponseEntity<?> handleBadRequestException2(HandlerMethodValidationException ex, WebRequest request) {
+        return new ResponseEntity<>(ex.getValueResults(), HttpStatus.BAD_REQUEST);
     }
 }

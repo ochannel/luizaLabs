@@ -1,5 +1,6 @@
 package com.luizalabs.fileconverter.infrastructure.entrypoint.rest;
 
+import com.luizalabs.fileconverter.core.exception.BadRequestException;
 import com.luizalabs.fileconverter.core.usecase.FindByOrderDateBetweenStartAndEnd;
 import com.luizalabs.fileconverter.core.usecase.GetAllOrder;
 import com.luizalabs.fileconverter.core.usecase.GetOrderOfId;
@@ -52,12 +53,13 @@ public class OrderController {
     @ResponseStatus(HttpStatus.OK)
     public List<MainOrderVO> getOrderBetweenDates(
             @NotNull(message = "Date cannot be null")
-            @PastOrPresent(message = "Date must be in the past or present")
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @NotNull(message = "Date cannot be null")
-            @PastOrPresent(message = "Date must be in the past or present")
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate
     ) {
+        if (startDate.isAfter(endDate)) {
+            throw new BadRequestException("startDate must be before or equal to endDate");
+        }
         return findByOrderDateBetweenStartAndEnd.execute(startDate, endDate).stream().map(order -> mainOrderVOMapper.create(order)).collect(Collectors.toList());
     }
 
