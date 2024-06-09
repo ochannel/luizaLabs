@@ -166,6 +166,20 @@ class OrderControllerIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)));
     }
+    @Test
+    @DisplayName("Give: startDate is later than endDate When: call get to /api/order/search Then: Order empty list returned")
+    void getOrderBetweenDatesstartDateMustBeBeforeOrEqualToEndDate() throws Exception {
+        //Given
+        String startDate = "2021-01-01";
+        String endDate = "2019-01-01";
+        //When - Then
+        mockMvc.perform(get("/api/orders/search")
+                        .param("startDate", startDate)
+                        .param("endDate", endDate)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$", is("startDate must be before or equal to endDate")));
+    }
 
     @Test
     @DisplayName("Give: page and size When: call get to /api/order Then: Order list returned")

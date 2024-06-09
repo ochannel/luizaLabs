@@ -57,9 +57,6 @@ public class OrderController {
             @NotNull(message = "Date cannot be null")
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate
     ) {
-        if (startDate.isAfter(endDate)) {
-            throw new BadRequestException("startDate must be before or equal to endDate");
-        }
         return findByOrderDateBetweenStartAndEnd.execute(startDate, endDate).stream().map(order -> mainOrderVOMapper.create(order)).collect(Collectors.toList());
     }
 
