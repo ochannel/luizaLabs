@@ -3,6 +3,7 @@ package com.luizalabs.fileconverter.core.entity;
 import lombok.*;
 
 import java.math.BigDecimal;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -10,5 +11,5 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(exclude = "productPrice")
 public class Product {
     private Long productId;
-    private BigDecimal productPrice ;
+    private BigDecimal productPrice;
 }

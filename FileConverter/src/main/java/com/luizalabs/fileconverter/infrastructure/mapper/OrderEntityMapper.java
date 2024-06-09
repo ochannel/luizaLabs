@@ -16,17 +16,19 @@ public class OrderEntityMapper {
 
     private final ModelMapper mapper;
 
-    public Order create(com.luizalabs.fileconverter.infrastructure.mongodb.document.OrderDocument orderDocument){
+    public Order create(com.luizalabs.fileconverter.infrastructure.mongodb.document.OrderDocument orderDocument) {
         return mapper.map(orderDocument, Order.class);
     }
-    public Page<Order> create(Page<com.luizalabs.fileconverter.infrastructure.mongodb.document.OrderDocument> page){
+
+    public Page<Order> create(Page<com.luizalabs.fileconverter.infrastructure.mongodb.document.OrderDocument> page) {
 
         List<Order> listOrder = page.stream()
                 .map(user -> mapper.map(user, Order.class))
                 .collect(Collectors.toList());
         return new PageImpl<>(listOrder, page.getPageable(), page.getTotalElements());
     }
-    public List<Order> create(List<com.luizalabs.fileconverter.infrastructure.mongodb.document.OrderDocument> listDocument){
+
+    public List<Order> create(List<com.luizalabs.fileconverter.infrastructure.mongodb.document.OrderDocument> listDocument) {
 
         List<Order> listOrder = listDocument.stream()
                 .map(order -> mapper.map(order, Order.class))

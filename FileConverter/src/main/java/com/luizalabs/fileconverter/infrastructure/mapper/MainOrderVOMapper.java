@@ -55,7 +55,8 @@ public class MainOrderVOMapper {
         mainOrderVO.setOrders(Arrays.asList(orderVO));
         return mainOrderVO;
     }
-    public Page<MainOrderVO> create(Page<Order> page){
+
+    public Page<MainOrderVO> create(Page<Order> page) {
         List<MainOrderVO> listOrder = page.stream()
                 .map(order -> create(order))
                 .collect(Collectors.toList());

@@ -1,7 +1,6 @@
 package com.luizalabs.fileconverter.core.usecase.data.util;
 
 
-
 import com.luizalabs.fileconverter.infrastructure.mongodb.document.ProductDocument;
 
 import java.math.BigDecimal;

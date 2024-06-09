@@ -33,6 +33,7 @@ public class OrderMongoWapper implements OrderGateWay {
         com.luizalabs.fileconverter.infrastructure.mongodb.document.OrderDocument orderDocument = orderDocumentMapper.create(order);
         return orderEntityMapper.create(repository.save(orderDocument));
     }
+
     @Override
     public Page<Order> getAllOrder(int page, int size) {
         Sort.Direction direction = Sort.Direction.fromString("desc");

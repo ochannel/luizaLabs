@@ -13,5 +13,5 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 public class UserDocument {
     private Long userId;
-    private String name ;
+    private String name;
 }

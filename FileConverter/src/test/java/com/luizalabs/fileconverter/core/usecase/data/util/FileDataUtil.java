@@ -16,6 +16,7 @@ public class FileDataUtil {
         InputStream inputStream = resource.getInputStream();
         return new BufferedReader(new InputStreamReader(inputStream));
     }
+
     public static byte[] getBytes(String fileName) throws IOException {
         Resource resource = new ClassPathResource(fileName);
         return resource.getContentAsByteArray();

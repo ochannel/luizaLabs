@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class GetAllOrder {
     private final OrderGateWay orderGateWay;
 
-    public Page<Order> execute(int page, int size){
-        return orderGateWay.getAllOrder(page,size);
+    public Page<Order> execute(int page, int size) {
+        return orderGateWay.getAllOrder(page, size);
     }
 }

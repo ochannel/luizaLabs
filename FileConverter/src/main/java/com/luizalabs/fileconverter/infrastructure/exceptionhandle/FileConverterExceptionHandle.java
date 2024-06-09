@@ -27,6 +27,7 @@ public class FileConverterExceptionHandle {
     public ResponseEntity<?> handleBadRequestException(NotFoundException ex, WebRequest request) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
+
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<?> handleBadRequestException(BadRequestException ex, WebRequest request) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
@@ -35,36 +36,42 @@ public class FileConverterExceptionHandle {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<MensageResponseVo> exception(Exception ex, WebRequest request) {
         MensageResponseVo message = new MensageResponseVo(LocalDateTime.now(), "please, contact admin.");
-        log.error(message.getMessage(),ex);
+        log.error(message.getMessage(), ex);
         return new ResponseEntity<MensageResponseVo>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<?> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex, WebRequest request) {
         String errorMessage = String.format("Failed to convert value of type '%s' to required type '%s'. %s",
                 ex.getValue().getClass().getSimpleName(), ex.getRequiredType().getSimpleName(), ex.getMessage());
         return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
     }
+
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public ResponseEntity<Map<String, String>> handleMissingParams(MissingServletRequestParameterException ex) {
         Map<String, String> error = new HashMap<>();
         error.put(ex.getParameterName(), ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
+
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
     public ResponseEntity<String> handleHttpMediaTypeNotSupported(HttpMediaTypeNotSupportedException ex) {
         String errorMessage = "Content-Type " + ex.getContentType() + " is not supported. Supported content types are: " + ex.getSupportedMediaTypes();
         return new ResponseEntity<>(errorMessage, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
     }
+
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     public ResponseEntity<String> handleMaxUploadSizeExceeded(MaxUploadSizeExceededException ex) {
         String errorMessage = "The uploaded file exceeds the maximum permitted size.";
         return new ResponseEntity<>(errorMessage, HttpStatus.PAYLOAD_TOO_LARGE);
     }
+
     @ExceptionHandler(NoResourceFoundException.class)
     public ResponseEntity<String> handleNoResourceFoundException(NoResourceFoundException ex) {
         String errorMessage = "The requested resource could not be found.";
         return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
     }
+
     @ExceptionHandler(HandlerMethodValidationException.class)
     public ResponseEntity<?> handleBadRequestException2(HandlerMethodValidationException ex, WebRequest request) {
         return new ResponseEntity<>(ex.getValueResults(), HttpStatus.BAD_REQUEST);

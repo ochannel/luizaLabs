@@ -11,6 +11,6 @@ import java.io.InputStreamReader;
 @Component
 public class BufferedReaderMapper {
     public BufferedReader create(MultipartFile file) throws IOException {
-      return new BufferedReader(new InputStreamReader(file.getInputStream()));
-   }
+        return new BufferedReader(new InputStreamReader(file.getInputStream()));
+    }
 }

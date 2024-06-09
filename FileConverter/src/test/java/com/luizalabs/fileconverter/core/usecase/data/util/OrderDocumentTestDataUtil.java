@@ -7,16 +7,16 @@ import java.time.LocalDate;
 
 public class OrderDocumentTestDataUtil {
 
-   public static OrderDocument getOrder(){
-       UserDocument user = UserDocument.builder()
-               .name("Alfredo Oliveira")
-               .userId(1L).build();
-       OrderDocument order = OrderDocument.builder()
-               .user(user)
-               .products(ProductDocumentTestDataUtil.getProducts())
-               .orderDate(LocalDate.of(2021, 1, 1))
-               .orderId(1L)
-               .build();
-       return order;
-   }
+    public static OrderDocument getOrder() {
+        UserDocument user = UserDocument.builder()
+                .name("Alfredo Oliveira")
+                .userId(1L).build();
+        OrderDocument order = OrderDocument.builder()
+                .user(user)
+                .products(ProductDocumentTestDataUtil.getProducts())
+                .orderDate(LocalDate.of(2021, 1, 1))
+                .orderId(1L)
+                .build();
+        return order;
+    }
 }

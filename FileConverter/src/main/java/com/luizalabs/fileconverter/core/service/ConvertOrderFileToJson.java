@@ -49,7 +49,7 @@ public class ConvertOrderFileToJson {
             return Optional.of(order);
 
         } catch (Exception e) {
-            log.warn("Line didn't process,"+line);
+            log.warn("Line didn't process," + line);
             return Optional.empty();
         }
     }

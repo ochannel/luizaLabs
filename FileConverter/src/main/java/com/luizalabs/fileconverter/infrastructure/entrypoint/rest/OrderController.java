@@ -1,6 +1,5 @@
 package com.luizalabs.fileconverter.infrastructure.entrypoint.rest;
 
-import com.luizalabs.fileconverter.core.exception.BadRequestException;
 import com.luizalabs.fileconverter.core.usecase.FindByOrderDateBetweenStartAndEnd;
 import com.luizalabs.fileconverter.core.usecase.GetAllOrder;
 import com.luizalabs.fileconverter.core.usecase.GetOrderOfId;
@@ -10,7 +9,6 @@ import com.luizalabs.fileconverter.infrastructure.mapper.BufferedReaderMapper;
 import com.luizalabs.fileconverter.infrastructure.mapper.MainOrderVOMapper;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PastOrPresent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -60,7 +58,7 @@ public class OrderController {
         return findByOrderDateBetweenStartAndEnd.execute(startDate, endDate).stream().map(order -> mainOrderVOMapper.create(order)).collect(Collectors.toList());
     }
 
-    @GetMapping(value = "/",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public Page<MainOrderVO> getAllOrder(
             @RequestParam(defaultValue = "0") int page,
