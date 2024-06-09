@@ -2,7 +2,7 @@ package com.luizalabs.fileconverter.core.usecase;
 
 import com.luizalabs.fileconverter.core.entity.Order;
 import com.luizalabs.fileconverter.core.exception.BadRequestException;
-import com.luizalabs.fileconverter.core.gateway.OrderGateWay;
+import com.luizalabs.fileconverter.core.gateway.OrderGateway;
 import com.luizalabs.fileconverter.core.service.ConvertOrderFileToJson;
 import com.luizalabs.fileconverter.core.usecase.data.util.FileDataUtil;
 import com.luizalabs.fileconverter.core.usecase.data.util.OrderTestDataUtil;
@@ -31,7 +31,7 @@ class LoadOrdersFilesTest {
     @Mock
     private ConvertOrderFileToJson convertOrderFileToJson;
     @Mock
-    private OrderGateWay orderGateWay;
+    private OrderGateway orderGateWay;
     @InjectMocks
     private LoadOrdersFiles loadOrdersFiles;
 

@@ -3,7 +3,7 @@ package com.luizalabs.fileconverter.core.usecase;
 import com.luizalabs.fileconverter.core.entity.Order;
 import com.luizalabs.fileconverter.core.entity.Product;
 import com.luizalabs.fileconverter.core.exception.BadRequestException;
-import com.luizalabs.fileconverter.core.gateway.OrderGateWay;
+import com.luizalabs.fileconverter.core.gateway.OrderGateway;
 import com.luizalabs.fileconverter.core.service.ConvertOrderFileToJson;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class LoadOrdersFiles {
     private final ConvertOrderFileToJson convertOrderFileToJson;
-    private final OrderGateWay orderGateWay;
+    private final OrderGateway orderGateWay;
 
     public List<Order> execute(BufferedReader fileBuffer) throws IOException {
         List<Order> returnlist = new ArrayList<>();

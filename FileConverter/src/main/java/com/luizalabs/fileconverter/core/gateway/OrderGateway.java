@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public interface OrderGateWay {
+public interface OrderGateway {
     public Order save(Order entity);
 
     public Page<Order> getAllOrder(int page, int size);

@@ -1,7 +1,7 @@
 package com.luizalabs.fileconverter.infrastructure.mongodb;
 
 import com.luizalabs.fileconverter.core.entity.Order;
-import com.luizalabs.fileconverter.core.gateway.OrderGateWay;
+import com.luizalabs.fileconverter.core.gateway.OrderGateway;
 import com.luizalabs.fileconverter.infrastructure.mapper.OrderDocumentMapper;
 import com.luizalabs.fileconverter.infrastructure.mapper.OrderEntityMapper;
 import com.luizalabs.fileconverter.infrastructure.mongodb.repository.OrderRepository;
@@ -21,7 +21,7 @@ import java.util.Optional;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class OrderMongoWapper implements OrderGateWay {
+public class OrderMongoWapper implements OrderGateway {
 
     private final OrderRepository repository;
     private final OrderRepositoryPagination orderRepositoryPagination;

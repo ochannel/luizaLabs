@@ -1,7 +1,7 @@
 package com.luizalabs.fileconverter.core.usecase;
 
 import com.luizalabs.fileconverter.core.entity.Order;
-import com.luizalabs.fileconverter.core.gateway.OrderGateWay;
+import com.luizalabs.fileconverter.core.gateway.OrderGateway;
 import com.luizalabs.fileconverter.core.usecase.data.util.OrderTestDataUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ import static org.mockito.BDDMockito.given;
 @ExtendWith(MockitoExtension.class)
 class FindByOrderDateBetweenStartAndEndTest {
     @Mock
-    private OrderGateWay orderGateWay;
+    private OrderGateway orderGateWay;
     @InjectMocks
     private FindByOrderDateBetweenStartAndEnd findByOrderDateBetweenStartAndEnd;
 
