@@ -1,7 +1,7 @@
 package com.luizalabs.fileconverter.core.service;
 
 import com.luizalabs.fileconverter.core.entity.Order;
-import com.luizalabs.fileconverter.core.usecase.data.util.BufferedReaderDataUtil;
+import com.luizalabs.fileconverter.core.usecase.data.util.FileDataUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,7 +24,7 @@ class ConvertOrderFileToJsonTest {
     void getListOfOrderSuccessfully() throws IOException {
         //GIVEN - ARRANGE
         //WHEN  - ACT
-        List<Order> returnOrderList = convertOrderFileToJson.getListOfOrder(BufferedReaderDataUtil.getFile("file1.txt"));
+        List<Order> returnOrderList = convertOrderFileToJson.getListOfOrder(FileDataUtil.getFile("file1.txt"));
         //THEN  - ASSERT
         assertThat(returnOrderList.size(), is(2));
         assertThat(returnOrderList.get(0).getOrderId(), is(753L));
@@ -35,7 +35,7 @@ class ConvertOrderFileToJsonTest {
     void getListOfOrderEmptyFile() throws IOException {
         //GIVEN - ARRANGE
         //WHEN  - ACT
-        List<Order> returnOrderList = convertOrderFileToJson.getListOfOrder(BufferedReaderDataUtil.getFile("empty.txt"));
+        List<Order> returnOrderList = convertOrderFileToJson.getListOfOrder(FileDataUtil.getFile("empty.txt"));
         //THEN  - ASSERT
         assertThat(returnOrderList.size(), is(0));
     }

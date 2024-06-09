@@ -4,7 +4,7 @@ import com.luizalabs.fileconverter.core.entity.Order;
 import com.luizalabs.fileconverter.core.exception.BadRequestException;
 import com.luizalabs.fileconverter.core.gateway.OrderGateWay;
 import com.luizalabs.fileconverter.core.service.ConvertOrderFileToJson;
-import com.luizalabs.fileconverter.core.usecase.data.util.BufferedReaderDataUtil;
+import com.luizalabs.fileconverter.core.usecase.data.util.FileDataUtil;
 import com.luizalabs.fileconverter.core.usecase.data.util.OrderTestDataUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,7 +39,8 @@ class LoadOrdersFilesTest {
     @Test
     void loadOrdersFilesSuccessfully() throws IOException {
         //GIVEN - ARRANGE
-        BufferedReader bufferedReader = BufferedReaderDataUtil.getFile("file1.txt");
+        BufferedReader bufferedReader = FileDataUtil.getFile("file1.txt");
+
         Order expected1 = OrderTestDataUtil.getOrderForLine().get(0);
         Order expected2 = OrderTestDataUtil.getOrderForLine().get(1);
         given(orderGateWay.findById(anyLong())).willReturn(Optional.empty()).willReturn(Optional.empty());
@@ -56,7 +57,7 @@ class LoadOrdersFilesTest {
     @Test
     void loadOrdersFilesInvalidFile() throws IOException {
         //GIVEN - ARRANGE
-        BufferedReader bufferedReader = BufferedReaderDataUtil.getFile("file1.txt");
+        BufferedReader bufferedReader = FileDataUtil.getFile("file1.txt");
         given(convertOrderFileToJson.getListOfOrder(bufferedReader)).willReturn(List.of());
         //WHEN  - ACT
         BadRequestException exception = assertThrows(BadRequestException.class, () -> {
