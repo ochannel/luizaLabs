@@ -54,7 +54,7 @@ Este projeto segue os princípios da Arquitetura Limpa, também conhecida como C
 2. Configure o MongoDB para rodar localmente:
 
     ```sh 
-    docker-compose up 
+    docker-compose up -d
     ```
 
 3. Compile e execute o projeto:
