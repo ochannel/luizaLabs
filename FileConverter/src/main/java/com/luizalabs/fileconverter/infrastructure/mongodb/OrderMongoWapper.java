@@ -35,7 +35,7 @@ public class OrderMongoWapper implements OrderGateway {
     }
 
     @Override
-    public Page<Order> getAllOrder(int page, int size) {
+    public Page<Order> getAllOrders(int page, int size) {
         Sort.Direction direction = Sort.Direction.fromString("desc");
         Pageable pageable = PageRequest.of(page, size, Sort.by(direction, "idOrder"));
         Page<com.luizalabs.fileconverter.infrastructure.mongodb.document.OrderDocument> paginationReturn = orderRepositoryPagination.findAll(pageable);

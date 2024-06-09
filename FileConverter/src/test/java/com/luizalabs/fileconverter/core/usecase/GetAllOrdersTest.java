@@ -30,7 +30,7 @@ class GetAllOrdersTest {
         int page = 1;
         int size = 1;
         Page<Order> expected = OrderTestDataUtil.getPageOrder(page, size);
-        given(orderGateWay.getAllOrder(page, size)).willReturn(expected);
+        given(orderGateWay.getAllOrders(page, size)).willReturn(expected);
         //WHEN  - ACT
         Page<Order> retunPage = getAllOrders.execute(page, size);
         //THEN  - ASSERT
@@ -45,7 +45,7 @@ class GetAllOrdersTest {
         int page = 1;
         int size = 1;
         Page<Order> expected = OrderTestDataUtil.getPageOrderEmpty(page, size);
-        given(orderGateWay.getAllOrder(page, size)).willReturn(expected);
+        given(orderGateWay.getAllOrders(page, size)).willReturn(expected);
         //WHEN  - ACT
         Page<Order> retunPage = getAllOrders.execute(page, size);
         //THEN  - ASSERT

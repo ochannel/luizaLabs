@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface OrderGateway {
     public Order save(Order entity);
 
-    public Page<Order> getAllOrder(int page, int size);
+    public Page<Order> getAllOrders(int page, int size);
 
     public Optional<Order> findById(Long id);
 

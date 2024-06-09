@@ -12,6 +12,6 @@ public class GetAllOrders {
     private final OrderGateway orderGateWay;
 
     public Page<Order> execute(int page, int size) {
-        return orderGateWay.getAllOrder(page, size);
+        return orderGateWay.getAllOrders(page, size);
     }
 }

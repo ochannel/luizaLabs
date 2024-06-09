@@ -1,4 +1,4 @@
-package com.luizalabs.fileconverter.infrastructure.exceptionhandle;
+package com.luizalabs.fileconverter.infrastructure.exceptionhandler;
 
 import com.luizalabs.fileconverter.core.exception.BadRequestException;
 import com.luizalabs.fileconverter.core.exception.NotFoundException;
@@ -22,7 +22,7 @@ import java.util.Map;
 
 @ControllerAdvice
 @Slf4j
-public class FileConverterExceptionHandle {
+public class FileConverterExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<?> handleBadRequestException(NotFoundException ex, WebRequest request) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);

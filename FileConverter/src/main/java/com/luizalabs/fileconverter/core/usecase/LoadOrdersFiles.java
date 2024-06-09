@@ -18,7 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class LoadOrdersFiles {
     private final ConvertOrderFileToJson convertOrderFileToJson;
-    private final OrderGateway orderGateWay;
+    private final OrderGateway orderGateway;
 
     public List<Order> execute(BufferedReader fileBuffer) throws IOException {
         List<Order> returnlist = new ArrayList<>();
@@ -37,15 +37,15 @@ public class LoadOrdersFiles {
     }
 
     private Order saveOrUpdate(Order order) {
-        Optional<Order> orderDb = orderGateWay.findById(order.getOrderId());
+        Optional<Order> orderDb = orderGateway.findById(order.getOrderId());
         if (orderDb.isEmpty()) {
-            return orderGateWay.save(order);
+            return orderGateway.save(order);
         }
         orderDb.get().getProducts().remove(order.getProducts().get(0));
         List<Product> listProductTemp = new ArrayList<>();
         listProductTemp.add(order.getProducts().get(0));
         listProductTemp.addAll(orderDb.get().getProducts());
         order.setProducts(listProductTemp);
-        return orderGateWay.save(order);
+        return orderGateway.save(order);
     }
 }
