@@ -4,7 +4,7 @@ import com.luizalabs.fileconverter.core.entity.Order;
 import com.luizalabs.fileconverter.core.entity.Product;
 import com.luizalabs.fileconverter.core.exception.BadRequestException;
 import com.luizalabs.fileconverter.core.gateway.OrderGateway;
-import com.luizalabs.fileconverter.core.service.ConvertOrderFileToJson;
+import com.luizalabs.fileconverter.core.service.OrdersFileParser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +17,13 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class LoadOrdersFiles {
-    private final ConvertOrderFileToJson convertOrderFileToJson;
+    private final OrdersFileParser ordersFileParser;
     private final OrderGateway orderGateway;
 
     public List<Order> execute(BufferedReader fileBuffer) throws IOException {
         List<Order> returnlist = new ArrayList<>();
         List<Order> listOfOrder = new ArrayList<>();
-        convertOrderFileToJson.getListOfOrder(fileBuffer).forEach(order -> listOfOrder.add(order));
+        ordersFileParser.getListOfOrder(fileBuffer).forEach(order -> listOfOrder.add(order));
         if (listOfOrder.isEmpty()) {
             throw new BadRequestException("Please send a valid file or it is empty.Only .txt files are allowed.");
         }

@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-public class ConvertOrderFileToJson {
+public class OrdersFileParser {
 
     public List<Order> getListOfOrder(BufferedReader fileBuffer) throws IOException {
         List<Order> listOrder = new ArrayList<>();

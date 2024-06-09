@@ -3,7 +3,7 @@ package com.luizalabs.fileconverter.core.usecase;
 import com.luizalabs.fileconverter.core.entity.Order;
 import com.luizalabs.fileconverter.core.exception.BadRequestException;
 import com.luizalabs.fileconverter.core.gateway.OrderGateway;
-import com.luizalabs.fileconverter.core.service.ConvertOrderFileToJson;
+import com.luizalabs.fileconverter.core.service.OrdersFileParser;
 import com.luizalabs.fileconverter.core.usecase.data.util.FileDataUtil;
 import com.luizalabs.fileconverter.core.usecase.data.util.OrderTestDataUtil;
 import org.junit.jupiter.api.DisplayName;
@@ -29,7 +29,7 @@ import static org.mockito.BDDMockito.given;
 @ExtendWith(MockitoExtension.class)
 class LoadOrdersFilesTest {
     @Mock
-    private ConvertOrderFileToJson convertOrderFileToJson;
+    private OrdersFileParser ordersFileParser;
     @Mock
     private OrderGateway orderGateWay;
     @InjectMocks
@@ -44,7 +44,7 @@ class LoadOrdersFilesTest {
         Order expected1 = OrderTestDataUtil.getOrderForLine().get(0);
         Order expected2 = OrderTestDataUtil.getOrderForLine().get(1);
         given(orderGateWay.findById(anyLong())).willReturn(Optional.empty()).willReturn(Optional.empty());
-        given(convertOrderFileToJson.getListOfOrder(bufferedReader)).willReturn(OrderTestDataUtil.getOrderForLine());
+        given(ordersFileParser.getListOfOrder(bufferedReader)).willReturn(OrderTestDataUtil.getOrderForLine());
         given(orderGateWay.save(any(Order.class))).willReturn(expected1).willReturn(expected2);
         //WHEN  - ACT
         List<Order> returnListOrder = loadOrdersFiles.execute(bufferedReader);
@@ -58,7 +58,7 @@ class LoadOrdersFilesTest {
     void loadOrdersFilesInvalidFile() throws IOException {
         //GIVEN - ARRANGE
         BufferedReader bufferedReader = FileDataUtil.getFile("file1.txt");
-        given(convertOrderFileToJson.getListOfOrder(bufferedReader)).willReturn(List.of());
+        given(ordersFileParser.getListOfOrder(bufferedReader)).willReturn(List.of());
         //WHEN  - ACT
         BadRequestException exception = assertThrows(BadRequestException.class, () -> {
             loadOrdersFiles.execute(bufferedReader);

@@ -15,16 +15,16 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 @ExtendWith(MockitoExtension.class)
-class ConvertOrderFileToJsonTest {
+class OrdersFileParserTest {
     @InjectMocks
-    ConvertOrderFileToJson convertOrderFileToJson;
+    OrdersFileParser ordersFileParser;
 
     @DisplayName("Give: bufferedReader When:execute getListOfOrder Then:Returns an order list")
     @Test
     void getListOfOrderSuccessfully() throws IOException {
         //GIVEN - ARRANGE
         //WHEN  - ACT
-        List<Order> returnOrderList = convertOrderFileToJson.getListOfOrder(FileDataUtil.getFile("file1.txt"));
+        List<Order> returnOrderList = ordersFileParser.getListOfOrder(FileDataUtil.getFile("file1.txt"));
         //THEN  - ASSERT
         assertThat(returnOrderList.size(), is(2));
         assertThat(returnOrderList.get(0).getOrderId(), is(753L));
@@ -35,7 +35,7 @@ class ConvertOrderFileToJsonTest {
     void getListOfOrderEmptyFile() throws IOException {
         //GIVEN - ARRANGE
         //WHEN  - ACT
-        List<Order> returnOrderList = convertOrderFileToJson.getListOfOrder(FileDataUtil.getFile("empty.txt"));
+        List<Order> returnOrderList = ordersFileParser.getListOfOrder(FileDataUtil.getFile("empty.txt"));
         //THEN  - ASSERT
         assertThat(returnOrderList.size(), is(0));
     }
