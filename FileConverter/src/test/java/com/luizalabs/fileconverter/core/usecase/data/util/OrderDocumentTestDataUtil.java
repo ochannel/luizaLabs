@@ -11,12 +11,11 @@ public class OrderDocumentTestDataUtil {
         UserDocument user = UserDocument.builder()
                 .name("Alfredo Oliveira")
                 .userId(1L).build();
-        OrderDocument order = OrderDocument.builder()
+      return OrderDocument.builder()
                 .user(user)
                 .products(ProductDocumentTestDataUtil.getProducts())
                 .orderDate(LocalDate.of(2021, 1, 1))
                 .orderId(1L)
                 .build();
-        return order;
     }
 }
