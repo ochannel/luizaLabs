@@ -17,11 +17,11 @@ import static org.mockito.BDDMockito.given;
 
 
 @ExtendWith(MockitoExtension.class)
-class GetAllOrderTest {
+class GetAllOrdersTest {
     @Mock
     private OrderGateWay orderGateWay;
     @InjectMocks
-    private GetAllOrder getAllOrder;
+    private GetAllOrders getAllOrders;
 
     @DisplayName("Give:page and size When:executeUseCase Then:Returns an Page<order> ")
     @Test
@@ -32,7 +32,7 @@ class GetAllOrderTest {
         Page<Order> expected = OrderTestDataUtil.getPageOrder(page, size);
         given(orderGateWay.getAllOrder(page, size)).willReturn(expected);
         //WHEN  - ACT
-        Page<Order> retunPage = getAllOrder.execute(page, size);
+        Page<Order> retunPage = getAllOrders.execute(page, size);
         //THEN  - ASSERT
         assertThat(retunPage, is(expected));
         assertThat(retunPage.getTotalElements(), is(2L));
@@ -47,7 +47,7 @@ class GetAllOrderTest {
         Page<Order> expected = OrderTestDataUtil.getPageOrderEmpty(page, size);
         given(orderGateWay.getAllOrder(page, size)).willReturn(expected);
         //WHEN  - ACT
-        Page<Order> retunPage = getAllOrder.execute(page, size);
+        Page<Order> retunPage = getAllOrders.execute(page, size);
         //THEN  - ASSERT
         assertThat(retunPage, is(expected));
         assertThat(retunPage.getTotalElements(), is(0L));

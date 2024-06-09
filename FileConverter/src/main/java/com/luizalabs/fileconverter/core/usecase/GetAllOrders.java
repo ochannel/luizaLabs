@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class GetAllOrder {
+public class GetAllOrders {
     private final OrderGateWay orderGateWay;
 
     public Page<Order> execute(int page, int size) {

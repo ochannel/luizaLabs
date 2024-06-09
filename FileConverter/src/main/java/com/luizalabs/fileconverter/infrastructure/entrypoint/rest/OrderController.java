@@ -1,7 +1,7 @@
 package com.luizalabs.fileconverter.infrastructure.entrypoint.rest;
 
 import com.luizalabs.fileconverter.core.usecase.FindByOrderDateBetweenStartAndEnd;
-import com.luizalabs.fileconverter.core.usecase.GetAllOrder;
+import com.luizalabs.fileconverter.core.usecase.GetAllOrders;
 import com.luizalabs.fileconverter.core.usecase.GetOrderOfId;
 import com.luizalabs.fileconverter.core.usecase.LoadOrdersFiles;
 import com.luizalabs.fileconverter.infrastructure.entrypoint.vo.MainOrderVO;
@@ -33,7 +33,7 @@ public class OrderController {
     private final LoadOrdersFiles useCase;
     private final GetOrderOfId getOrderOfId;
     private final FindByOrderDateBetweenStartAndEnd findByOrderDateBetweenStartAndEnd;
-    private final GetAllOrder getAllOrder;
+    private final GetAllOrders getAllOrders;
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
@@ -63,6 +63,6 @@ public class OrderController {
     public Page<MainOrderVO> getAllOrder(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
-        return mainOrderVOMapper.create(getAllOrder.execute(page, size));
+        return mainOrderVOMapper.create(getAllOrders.execute(page, size));
     }
 }
