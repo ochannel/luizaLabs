@@ -31,7 +31,7 @@ class GetOrderOfIdTest {
     void getOrderOfIdSuccessfully() {
         //GIVEN - ARRANGE
         Long id = 2L;
-        Optional<Order> expected = Optional.of(OrderTestDataUtil.getAllOrder().get(0));
+        Optional<Order> expected = Optional.of(OrderTestDataUtil.getAllOrders().get(0));
         given(orderGateWay.findById(id)).willReturn(expected);
         //WHEN  - ACT
         Order returnOrder = getOrderOfId.execute(id);

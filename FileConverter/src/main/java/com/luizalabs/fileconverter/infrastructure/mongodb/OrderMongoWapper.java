@@ -4,6 +4,7 @@ import com.luizalabs.fileconverter.core.entity.Order;
 import com.luizalabs.fileconverter.core.gateway.OrderGateway;
 import com.luizalabs.fileconverter.infrastructure.mapper.OrderDocumentMapper;
 import com.luizalabs.fileconverter.infrastructure.mapper.OrderEntityMapper;
+import com.luizalabs.fileconverter.infrastructure.mongodb.document.OrderDocument;
 import com.luizalabs.fileconverter.infrastructure.mongodb.repository.OrderRepository;
 import com.luizalabs.fileconverter.infrastructure.mongodb.repository.OrderRepositoryPagination;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,7 @@ public class OrderMongoWapper implements OrderGateway {
 
     @Override
     public Order save(Order order) {
-        com.luizalabs.fileconverter.infrastructure.mongodb.document.OrderDocument orderDocument = orderDocumentMapper.create(order);
+        OrderDocument orderDocument = orderDocumentMapper.create(order);
         return orderEntityMapper.create(repository.save(orderDocument));
     }
 
@@ -38,7 +39,7 @@ public class OrderMongoWapper implements OrderGateway {
     public Page<Order> getAllOrders(int page, int size) {
         Sort.Direction direction = Sort.Direction.fromString("desc");
         Pageable pageable = PageRequest.of(page, size, Sort.by(direction, "idOrder"));
-        Page<com.luizalabs.fileconverter.infrastructure.mongodb.document.OrderDocument> paginationReturn = orderRepositoryPagination.findAll(pageable);
+        Page<OrderDocument> paginationReturn = orderRepositoryPagination.findAll(pageable);
         return orderEntityMapper.create(paginationReturn);
     }
 

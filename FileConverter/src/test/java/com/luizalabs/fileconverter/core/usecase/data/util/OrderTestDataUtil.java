@@ -12,7 +12,7 @@ import java.util.List;
 
 public class OrderTestDataUtil {
 
-    public static List<Order> getAllOrder() {
+    public static List<Order> getAllOrders() {
         User user = User.builder()
                 .name("Alfredo Oliveira")
                 .userId(1L).build();
@@ -27,7 +27,7 @@ public class OrderTestDataUtil {
 
     public static Page<Order> getPageOrder(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("orderId").ascending());
-        Page<Order> expected = new PageImpl<>(OrderTestDataUtil.getAllOrder(), pageable, OrderTestDataUtil.getAllOrder().size());
+        Page<Order> expected = new PageImpl<>(OrderTestDataUtil.getAllOrders(), pageable, OrderTestDataUtil.getAllOrders().size());
         return expected;
     }
 
