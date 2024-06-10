@@ -22,7 +22,7 @@ public class OrderTestDataUtil {
                 .orderDate(LocalDate.of(2021, 1, 1))
                 .orderId(1L)
                 .build();
-        return Arrays.asList(order);
+        return Collections.singletonList(order);
     }
 
     public static Page<Order> getPageOrder(int page, int size) {
@@ -33,7 +33,7 @@ public class OrderTestDataUtil {
 
     public static Page<Order> getPageOrderEmpty(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("orderId").ascending());
-        Page<Order> expected = new PageImpl<>(Arrays.asList(), pageable, Arrays.asList().size());
+        Page<Order> expected = new PageImpl<>(List.of(), pageable, List.of().size());
         return expected;
     }
 

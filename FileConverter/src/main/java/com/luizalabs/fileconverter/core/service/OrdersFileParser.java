@@ -11,10 +11,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -43,7 +40,7 @@ public class OrdersFileParser {
             Order order = Order.builder()
                     .orderDate(LocalDate.parse(line.substring(87, 95).trim(), formatter))
                     .orderId(Long.parseLong(line.substring(55, 65).trim()))
-                    .products(Arrays.asList(product))
+                    .products(Collections.singletonList(product))
                     .user(user)
                     .build();
             return Optional.of(order);

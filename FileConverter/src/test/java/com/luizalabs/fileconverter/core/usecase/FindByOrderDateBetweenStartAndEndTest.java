@@ -47,7 +47,7 @@ class FindByOrderDateBetweenStartAndEndTest {
         //GIVEN - ARRANGE
         LocalDate startDate = LocalDate.of(2001, 01, 01);
         LocalDate endDate = LocalDate.of(2001, 01, 10);
-        List<Order> expected = Arrays.asList();
+        List<Order> expected = List.of();
         given(orderGateWay.findByOrderDateBetween(startDate, endDate)).willReturn(expected);
         //WHEN  - ACT
         List<Order> returnList = findByOrderDateBetweenStartAndEnd.execute(startDate, endDate);

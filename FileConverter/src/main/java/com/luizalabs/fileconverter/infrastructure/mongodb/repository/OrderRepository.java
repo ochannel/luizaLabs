@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface OrderRepository extends ListCrudRepository<OrderDocument, Long> {
     @Query("{ 'orderDate' : { $gte: ?0, $lte: ?1 } }")
-    public List<OrderDocument> findByOrderDateBetween(LocalDate startDate, LocalDate endDate);
+    List<OrderDocument> findByOrderDateBetween(LocalDate startDate, LocalDate endDate);
 }

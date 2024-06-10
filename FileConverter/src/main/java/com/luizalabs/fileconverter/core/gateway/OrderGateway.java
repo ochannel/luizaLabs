@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OrderGateway {
-    public Order save(Order entity);
+    Order save(Order entity);
 
-    public Page<Order> getAllOrders(int page, int size);
+    Page<Order> getAllOrders(int page, int size);
 
-    public Optional<Order> findById(Long id);
+    Optional<Order> findById(Long id);
 
-    public List<Order> findByOrderDateBetween(LocalDate startDate, LocalDate endDate);
+    List<Order> findByOrderDateBetween(LocalDate startDate, LocalDate endDate);
 
 }

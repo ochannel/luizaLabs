@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,7 +51,7 @@ public class MainOrderVOMapper {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         OrderVO orderVO = OrderVO.builder().orderId(order.getOrderId()).dataOrder(order.getOrderDate().format(formatter)).total(order.getTotal()).products(listProductVo).build();
         MainOrderVO mainOrderVO = mapper.map(order, MainOrderVO.class);
-        mainOrderVO.setOrders(Arrays.asList(orderVO));
+        mainOrderVO.setOrders(Collections.singletonList(orderVO));
         return mainOrderVO;
     }
 
