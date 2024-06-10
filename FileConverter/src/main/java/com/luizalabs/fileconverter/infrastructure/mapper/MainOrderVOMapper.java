@@ -21,9 +21,8 @@ import java.util.stream.Collectors;
 
 
 @Component
-
 public class MainOrderVOMapper {
-    private final ModelMapper mapper;
+    private final ModelMapper mapper = new ModelMapper();
     Converter<LocalDate, String> localDateToString = new Converter<LocalDate, String>() {
         public String convert(MappingContext<LocalDate, String> context) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -31,8 +30,7 @@ public class MainOrderVOMapper {
         }
     };
 
-    public MainOrderVOMapper(ModelMapper mapper) {
-        this.mapper = mapper;
+    public MainOrderVOMapper() {
         mapperConfig();
     }
 

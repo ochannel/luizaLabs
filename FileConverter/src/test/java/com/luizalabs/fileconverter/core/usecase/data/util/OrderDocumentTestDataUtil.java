@@ -2,8 +2,10 @@ package com.luizalabs.fileconverter.core.usecase.data.util;
 
 import com.luizalabs.fileconverter.infrastructure.mongodb.document.OrderDocument;
 import com.luizalabs.fileconverter.infrastructure.mongodb.document.UserDocument;
+import org.springframework.data.domain.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class OrderDocumentTestDataUtil {
 
@@ -11,11 +13,23 @@ public class OrderDocumentTestDataUtil {
         UserDocument user = UserDocument.builder()
                 .name("Alfredo Oliveira")
                 .userId(1L).build();
-      return OrderDocument.builder()
+        return OrderDocument.builder()
                 .user(user)
                 .products(ProductDocumentTestDataUtil.getProducts())
                 .orderDate(LocalDate.of(2021, 1, 1))
                 .orderId(1L)
                 .build();
+    }
+
+    public static Page<OrderDocument> getPageOrder(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("orderId").descending());
+        Page<OrderDocument> expected = new PageImpl<>(List.of(getOrder()), pageable, List.of(getOrder()).size());
+        return expected;
+    }
+
+    public static Page<OrderDocument> getPageOrderEmpty(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("orderId").descending());
+        Page<OrderDocument> expected = new PageImpl<>(List.of(), pageable, List.of().size());
+        return expected;
     }
 }

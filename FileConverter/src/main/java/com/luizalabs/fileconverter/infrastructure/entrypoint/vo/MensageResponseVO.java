@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
-public class MensageResponseVo {
+public class MensageResponseVO {
     private LocalDateTime time;
     private String message;
 

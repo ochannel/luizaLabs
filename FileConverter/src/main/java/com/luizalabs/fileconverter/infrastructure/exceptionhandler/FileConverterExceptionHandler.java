@@ -2,7 +2,7 @@ package com.luizalabs.fileconverter.infrastructure.exceptionhandler;
 
 import com.luizalabs.fileconverter.core.exception.BadRequestException;
 import com.luizalabs.fileconverter.core.exception.NotFoundException;
-import com.luizalabs.fileconverter.infrastructure.entrypoint.vo.MensageResponseVo;
+import com.luizalabs.fileconverter.infrastructure.entrypoint.vo.MensageResponseVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,10 +34,10 @@ public class FileConverterExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<MensageResponseVo> exception(Exception ex, WebRequest request) {
-        MensageResponseVo message = new MensageResponseVo(LocalDateTime.now(), "please, contact admin.");
+    public ResponseEntity<MensageResponseVO> exception(Exception ex, WebRequest request) {
+        MensageResponseVO message = new MensageResponseVO(LocalDateTime.now(), "please, contact admin.");
         log.error(message.getMessage(), ex);
-        return new ResponseEntity<MensageResponseVo>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<MensageResponseVO>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)

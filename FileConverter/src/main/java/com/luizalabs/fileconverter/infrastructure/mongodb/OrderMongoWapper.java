@@ -24,7 +24,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class OrderMongoWapper implements OrderGateway {
 
-    private final OrderRepository repository;
+    private final OrderRepository orderRepository;
     private final OrderRepositoryPagination orderRepositoryPagination;
     private final OrderDocumentMapper orderDocumentMapper;
     private final OrderEntityMapper orderEntityMapper;
@@ -32,24 +32,24 @@ public class OrderMongoWapper implements OrderGateway {
     @Override
     public Order save(Order order) {
         OrderDocument orderDocument = orderDocumentMapper.create(order);
-        return orderEntityMapper.create(repository.save(orderDocument));
+        return orderEntityMapper.create(orderRepository.save(orderDocument));
     }
 
     @Override
     public Page<Order> getAllOrders(int page, int size) {
         Sort.Direction direction = Sort.Direction.fromString("desc");
-        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, "idOrder"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, "orderId"));
         Page<OrderDocument> paginationReturn = orderRepositoryPagination.findAll(pageable);
         return orderEntityMapper.create(paginationReturn);
     }
 
     @Override
     public Optional<Order> findById(Long id) {
-        return repository.findById(id).map(o -> orderEntityMapper.create(o));
+        return orderRepository.findById(id).map(o -> orderEntityMapper.create(o));
     }
 
     @Override
     public List<Order> findByOrderDateBetween(LocalDate startDate, LocalDate endDate) {
-        return orderEntityMapper.create(repository.findByOrderDateBetween(startDate, endDate));
+        return orderEntityMapper.create(orderRepository.findByOrderDateBetween(startDate, endDate));
     }
 }

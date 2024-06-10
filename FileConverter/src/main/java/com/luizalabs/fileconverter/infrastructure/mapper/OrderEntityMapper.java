@@ -1,6 +1,7 @@
 package com.luizalabs.fileconverter.infrastructure.mapper;
 
 import com.luizalabs.fileconverter.core.entity.Order;
+import com.luizalabs.fileconverter.infrastructure.mongodb.document.OrderDocument;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -14,13 +15,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class OrderEntityMapper {
 
-    private final ModelMapper mapper;
+    private final ModelMapper mapper = new ModelMapper();
 
-    public Order create(com.luizalabs.fileconverter.infrastructure.mongodb.document.OrderDocument orderDocument) {
+    public Order create(OrderDocument orderDocument) {
         return mapper.map(orderDocument, Order.class);
     }
 
-    public Page<Order> create(Page<com.luizalabs.fileconverter.infrastructure.mongodb.document.OrderDocument> page) {
+    public Page<Order> create(Page<OrderDocument> page) {
 
         List<Order> listOrder = page.stream()
                 .map(user -> mapper.map(user, Order.class))

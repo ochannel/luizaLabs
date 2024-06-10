@@ -47,12 +47,10 @@ class GetOrderOfIdTest {
         Long id = 100L;
         Optional<Order> expected = Optional.empty();
         given(orderGateWay.findById(id)).willReturn(expected);
-
         //WHEN  - ACT - GIVEN - ARRANGE
         NotFoundException exception = assertThrows(NotFoundException.class, () -> {
             getOrderOfId.execute(id);
         });
-
         //THEN  - ASSERT
         assertInstanceOf(NotFoundException.class, exception);
     }

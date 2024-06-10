@@ -1,6 +1,7 @@
 package com.luizalabs.fileconverter.infrastructure.mapper;
 
 import com.luizalabs.fileconverter.core.entity.Order;
+import com.luizalabs.fileconverter.infrastructure.mongodb.document.OrderDocument;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -8,9 +9,9 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class OrderDocumentMapper {
-    private final ModelMapper mapper;
+    private final ModelMapper mapper = new ModelMapper();
 
-    public com.luizalabs.fileconverter.infrastructure.mongodb.document.OrderDocument create(Order order) {
-        return mapper.map(order, com.luizalabs.fileconverter.infrastructure.mongodb.document.OrderDocument.class);
+    public OrderDocument create(Order order) {
+        return mapper.map(order, OrderDocument.class);
     }
 }
